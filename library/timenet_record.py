@@ -10,6 +10,8 @@ class TimeNetRecord:
             meta_data={}, # the meta data
             annotations={'start_indexes': [], 'end_indexes': [], 'annotations': []}, # annotations: list of start_indexes, end_indexes, and labels
     ):
+        # check the validity of annotations:
+        assert((len(annotations['start_indexes']) == len(annotations['end_indexes'])) and (len(annotations['end_indexes']) == len(annotations['annotations'])))
         self.record_data = record_data
         self.channel_names = channel_names
         self.meta_data = meta_data

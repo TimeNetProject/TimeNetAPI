@@ -12,7 +12,7 @@ parameters = {}
 
 # setting the parameters
 def set_parameters(
-        path_to_database='./data',
+        path_to_database='./data/',
         database_name='mitbih',
 ):
     parameters['path_to_database'] = path_to_database
@@ -22,7 +22,6 @@ def set_parameters(
 if __name__ == '__main__':
     print("Project TimeNet - Dataset generator")
 
-    print("Please set your parameters:")
     set_parameters()
 
     # importing the required libraries
@@ -30,10 +29,10 @@ if __name__ == '__main__':
         import library.dataset_importers.importer_mitbih as database_importer
 
     # retrieving the data from cloud and storing it in the specified data folder:
-    database_importer.download_the_original(parameters)
+    database_importer.download_the_original(parameters) #phase 1
 
     # transforming and saving the specified dataset
-    database_importer.transform_and_store(parameters)
+    #database_importer.transform_and_store(parameters) #phase 2
 
 
 
