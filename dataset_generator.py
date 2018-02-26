@@ -1,10 +1,6 @@
 # libraries
 
 
-
-
-
-
 available_datasets = ['mitbih', 'ptbdb', 'hapt']
 
 parameters = {}
@@ -33,11 +29,14 @@ if __name__ == '__main__':
         import library.dataset_importers.importer_hapt as database_importer
 
 
-    # retrieving the data from cloud and storing it in the specified data folder:
-    database_importer.download_the_original(parameters) #phase 1
+    flag_to_crawl = input("Have you created the TimeNet records already?\n\n")
+    if str(flag_to_crawl) == '0' or str(flag_to_crawl) == 'no':
+        # retrieving the data from cloud and storing it in the specified data folder:
+        database_importer.download_the_original(parameters) #phase 1
 
+    # applying the transforms and creating the final timenet package
     # transforming and saving the specified dataset
-    #database_importer.transform_and_store(parameters) #phase 2
+    database_importer.prepare_and_store_timenet_dataset(parameters) #phase 2
 
 
 

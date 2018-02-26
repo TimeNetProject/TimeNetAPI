@@ -65,3 +65,21 @@ def download_the_original(parameters):
         timenet_record.save(parameters['path_to_database'] + str(counter))
         print('Number of processed records: ' + str(counter))
         counter += 1
+
+
+def prepare_and_store_timenet_dataset(parameters):
+    file_names = os.listdir(parameters['path_to_database'])
+    timenet_records_for_package = []
+    package_counter = 1
+    for i in range(1, len(file_names) + 1):
+        timenet_records_for_package.append(pickle.load(open(parameters['path_to_database'] + str(i) + '.pkl', 'rb')))
+        if sys.getsizeof(timenet_records_for_package) > 1000000000:
+            fid = open('output_dataset/' + str(package_counter) + '.pkl', 'wb')
+            pickle.dump(timenet_records_for_package, fid)
+            fid.close()
+            timenet_records_for_package = []
+            package_counter += 1
+    fid = open('output_dataset/' + str(package_counter) + '.pkl', 'wb')
+    pickle.dump(timenet_records_for_package, fid)
+    fid.close()
+    print('STATUS: TimeNet dataset has been successfully stored in your outputs folder.')
